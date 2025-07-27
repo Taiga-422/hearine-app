@@ -1,3 +1,4 @@
+// 役職テーブル
 export const positions = [
   { id: "pos-1", title: "取締役", display_order: 1 },
   { id: "pos-2", title: "執行役員", display_order: 2 },
@@ -7,11 +8,14 @@ export const positions = [
   { id: "pos-6", title: "メンバー", display_order: 6 },
 ];
 
+// 部・課・チーム
 export const departments = [
   { id: "dep-1", name: "取締役会", parent_department_id: null, display_order: 1 },
   { id: "dep-2", name: "営業部", parent_department_id: "dep-1", display_order: 2 },
   { id: "dep-3", name: "企画部", parent_department_id: "dep-1", display_order: 3 },
   { id: "dep-4", name: "IT部", parent_department_id: "dep-1", display_order: 4 },
+  { id: "dep-5", name: "法務部", parent_department_id: "dep-1", display_order: 4 },
+  { id: "dep-6", name: "総務部", parent_department_id: "dep-1", display_order: 4 },
 ];
 
 export const sections = [
@@ -41,6 +45,7 @@ export const teams = [
   { id: "team-13", name: "法規対応", section_id: "sec-7", display_order: 4 },
 ];
 
+// 社員テーブル
 export const employees = [
   { id: "emp-1", last_name_kanji: "佐藤", first_name_kanji: "一郎", last_name_kana: "さとう", first_name_kana: "いちろう", position_id: "pos-1" },
   { id: "emp-2", last_name_kanji: "田中", first_name_kanji: "次郎", last_name_kana: "たなか", first_name_kana: "じろう", position_id: "pos-2" },
@@ -70,8 +75,10 @@ export const employees = [
   { id: "emp-26", last_name_kanji: "藤木", first_name_kanji: "美藻", last_name_kana: "ふじい", first_name_kana: "みほ", position_id: "pos-6" },
   { id: "emp-27", last_name_kanji: "藤村", first_name_kanji: "美世", last_name_kana: "ふじい", first_name_kana: "みほ", position_id: "pos-5" },
   { id: "emp-28", last_name_kanji: "藤蔵", first_name_kanji: "たつや", last_name_kana: "ふじい", first_name_kana: "みほ", position_id: "pos-5" },
+  { id: "emp-29", last_name_kanji: "藤尾", first_name_kanji: "たくや", last_name_kana: "ふじい", first_name_kana: "みほ", position_id: "pos-4" },
 ];
 
+// 社員と部・課・チームを紐づける中間テーブル
 export const department_employees = [
   { department_id: "dep-1", employee_id: "emp-1" },
   { department_id: "dep-1", employee_id: "emp-2" },
@@ -87,6 +94,10 @@ export const section_employees = [
   { section_id: "sec-2", employee_id: "emp-9" },
   { section_id: "sec-3", employee_id: "emp-10" },
   { section_id: "sec-4", employee_id: "emp-11" },
+  { section_id: "sec-5", employee_id: "emp-29" },
+  { section_id: "sec-6", employee_id: "emp-29" },
+  { section_id: "sec-7", employee_id: "emp-29" },
+  { section_id: "sec-4", employee_id: "emp-29" },
 ];
 
 export const team_employees = [

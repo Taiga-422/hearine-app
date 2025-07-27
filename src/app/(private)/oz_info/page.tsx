@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Typography, Box, Paper, Stack, IconButton } from "@mui/material";
 import { ExpandMore, ChevronRight } from "@mui/icons-material";
 import {
@@ -13,52 +13,41 @@ import {
   section_employees,
   team_employees,
 } from "@/app/(private)/oz_info/dummy_data";
+import type { Department, Section, Team, Employee } from "@/types/organization";
 
-// === ユーティリティ関数 ===
-const getPositionTitle = (position_id: string) => {
-  return positions.find((p) => p.id === position_id)?.title || "";
+// Map作成
+const positionMap = new Map(positions.map((p) => [p.id, p.title]));
+const getPositionTitle = (position_id: string) => positionMap.get(position_id) || "";
+
+const createEmployeeMap = (pairs: { employee_id: string; [key: string]: string }[], keyName: string) => {
+  const map = new Map<string, Set<string>>();
+  for (const pair of pairs) {
+    const key = pair[keyName];
+    if (!map.has(key)) map.set(key, new Set());
+    map.get(key)?.add(pair.employee_id);
+  }
+  return map;
 };
 
-const sortEmployeesByPosition = (emps: typeof employees) => {
-  return emps.sort(
+const departmentEmployeeMap = createEmployeeMap(department_employees, "department_id");
+const sectionEmployeeMap = createEmployeeMap(section_employees, "section_id");
+const teamEmployeeMap = createEmployeeMap(team_employees, "team_id");
+
+const allTeamEmployeeIds = new Set(team_employees.map((te) => te.employee_id));
+
+const sortEmployeesByPosition = (emps: Employee[]) => {
+  return [...emps].sort(
     (a, b) =>
       (positions.find((p) => p.id === a.position_id)?.display_order ?? 99) -
       (positions.find((p) => p.id === b.position_id)?.display_order ?? 99)
   );
 };
 
-const getEmployeesByTeam = (team_id: string) => {
-  const empIds = team_employees
-    .filter((te) => te.team_id === team_id)
-    .map((te) => te.employee_id);
-  return employees.filter((e) => empIds.includes(e.id));
-};
-
-const getTeamsBySection = (section_id: string) => {
-  return teams.filter((t) => t.section_id === section_id).sort((a, b) => a.display_order - b.display_order);
-};
-
-const getSectionsByDepartment = (department_id: string) => {
-  return sections.filter((s) => s.department_id === department_id).sort((a, b) => a.display_order - b.display_order);
-};
-
-const getEmployeesBySection = (section_id: string) => {
-  const empIds = section_employees
-    .filter((se) => se.section_id === section_id)
-    .map((se) => se.employee_id);
-  return employees.filter((e) => empIds.includes(e.id));
-};
-
-const getEmployeesByDepartment = (department_id: string) => {
-  const empIds = department_employees
-    .filter((de) => de.department_id === department_id)
-    .map((de) => de.employee_id);
-  return employees.filter((e) => empIds.includes(e.id));
-};
-
-// === 表示用コンポーネント ===
-const TeamBox = ({ team }: { team: typeof teams[number] }) => {
-  const members = sortEmployeesByPosition(getEmployeesByTeam(team.id));
+const TeamBox = ({ team }: { team: Team }) => {
+  const memberIds = teamEmployeeMap.get(team.id) || new Set();
+  const members = sortEmployeesByPosition(
+    employees.filter((e) => memberIds.has(e.id))
+  );
 
   return (
     <Paper elevation={1} sx={{ p: 2, minWidth: 200 }}>
@@ -74,15 +63,21 @@ const TeamBox = ({ team }: { team: typeof teams[number] }) => {
   );
 };
 
-const SectionBox = ({ section }: { section: typeof sections[number] }) => {
+const SectionBox = ({ section }: { section: Section }) => {
   const [expanded, setExpanded] = useState(false);
   const toggleExpand = () => setExpanded((prev) => !prev);
 
-  const teamsInSection = getTeamsBySection(section.id);
-  const sectionMembers = sortEmployeesByPosition(getEmployeesBySection(section.id));
-  const noTeamMembers = sectionMembers.filter(
-    (m) => !team_employees.find((te) => te.employee_id === m.id)
+  const teamsInSection = useMemo(
+    () => teams.filter((t) => t.section_id === section.id).sort((a, b) => a.display_order - b.display_order),
+    [section.id]
   );
+
+  const sectionMemberIds = sectionEmployeeMap.get(section.id) || new Set();
+  const sectionMembers = sortEmployeesByPosition(
+    employees.filter((e) => sectionMemberIds.has(e.id))
+  );
+
+  const noTeamMembers = sectionMembers.filter((m) => !allTeamEmployeeIds.has(m.id));
 
   return (
     <Paper elevation={2} sx={{ p: 2, mb: 2 }}>
@@ -106,7 +101,7 @@ const SectionBox = ({ section }: { section: typeof sections[number] }) => {
       )}
 
       {expanded && (
-        <Stack direction="row" spacing={2} flexWrap="wrap" sx={{ mt: 2, ml: 4 }}>
+        <Stack spacing={2} flexWrap="wrap" sx={{ mt: 2, ml: 4 }}>
           {teamsInSection.map((team) => (
             <TeamBox key={team.id} team={team} />
           ))}
@@ -116,12 +111,24 @@ const SectionBox = ({ section }: { section: typeof sections[number] }) => {
   );
 };
 
-const DepartmentBox = ({ department }: { department: typeof departments[number] }) => {
-  const deptEmployees = sortEmployeesByPosition(getEmployeesByDepartment(department.id));
-  const sectionList = getSectionsByDepartment(department.id);
-  const noSectionMembers = deptEmployees.filter(
-    (e) => !section_employees.find((se) => se.employee_id === e.id)
+const DepartmentBox = ({ department }: { department: Department }) => {
+  const deptMemberIds = departmentEmployeeMap.get(department.id) || new Set();
+  const deptEmployees = sortEmployeesByPosition(
+    employees.filter((e) => deptMemberIds.has(e.id))
   );
+
+  const sectionsInDept = useMemo(
+    () => sections.filter((s) => s.department_id === department.id).sort((a, b) => a.display_order - b.display_order),
+    [department.id]
+  );
+
+  const sectionEmpIds = new Set(
+    section_employees
+      .filter((se) => se.section_id && sectionsInDept.some((s) => s.id === se.section_id))
+      .map((se) => se.employee_id)
+  );
+
+  const noSectionMembers = deptEmployees.filter((e) => !sectionEmpIds.has(e.id));
 
   return (
     <Paper elevation={3} sx={{ p: 3, width: "100%" }}>
@@ -140,7 +147,7 @@ const DepartmentBox = ({ department }: { department: typeof departments[number] 
       )}
 
       <Stack spacing={2}>
-        {sectionList.map((section) => (
+        {sectionsInDept.map((section) => (
           <SectionBox key={section.id} section={section} />
         ))}
       </Stack>
@@ -148,20 +155,45 @@ const DepartmentBox = ({ department }: { department: typeof departments[number] 
   );
 };
 
+const computeDepartmentDepths = (): Record<string, number> => {
+  const map: Record<string, number> = {};
+
+  const getDepth = (id: string): number => {
+    if (map[id] !== undefined) return map[id];
+    const dept = departments.find((d) => d.id === id);
+    if (!dept) return 0;
+    if (!dept.parent_department_id) return (map[id] = 0);
+    return (map[id] = getDepth(dept.parent_department_id) + 1);
+  };
+
+  for (const dept of departments) getDepth(dept.id);
+  return map;
+};
+
 export default function HomePage() {
-  const sortedDepartments = departments.sort((a, b) => a.display_order - b.display_order);
+  const deptDepthMap = computeDepartmentDepths();
+  const maxDepth = Math.max(...Object.values(deptDepthMap));
+
+  const sortedDepartments = useMemo(
+    () => departments.sort((a, b) => a.display_order - b.display_order),
+    []
+  );
 
   return (
-    <main style={{ padding: "2rem" }}>
+    <main style={{ padding: "2rem", overflowX: "auto", whiteSpace: "nowrap" }}>
       <Typography variant="h5" gutterBottom>
         体制図
       </Typography>
 
-      <Stack spacing={4}>
-        {sortedDepartments.map((dep) => (
-          <DepartmentBox key={dep.id} department={dep} />
-        ))}
-      </Stack>
+      {[...Array(maxDepth + 1)].map((_, depth) => (
+        <Stack key={depth} spacing={4} direction="row" sx={{ mb: 4 }}>
+          {sortedDepartments
+            .filter((dep) => deptDepthMap[dep.id] === depth)
+            .map((dep) => (
+              <DepartmentBox key={dep.id} department={dep} />
+            ))}
+        </Stack>
+      ))}
     </main>
   );
 }
