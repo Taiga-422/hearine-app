@@ -236,7 +236,7 @@ export default function HomePage() {
 
   return (
     <main style={{ padding: "2rem", overflowX: "auto", whiteSpace: "nowrap" }}>
-      <Typography variant="h5" gutterBottom>
+      <Typography variant="h4" gutterBottom sx={{ fontFamily: "var(--font-geist-sans)" }}>
         体制図
       </Typography>
 
