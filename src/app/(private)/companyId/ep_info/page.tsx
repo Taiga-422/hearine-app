@@ -42,18 +42,17 @@ export default function EmployeeInfoPage() {
       component="main"
       sx={{
         p: 4,
-        fontFamily: "var(--font-geist-sans)",
         maxWidth: 800,
         mx: 'auto'
       }}
     >
-      <Typography variant="h4" gutterBottom sx={{ fontFamily: "var(--font-geist-sans)" }}>
+      <Typography variant="h4" gutterBottom>
         社員情報アップロード
       </Typography>
       
-      <Paper elevation={3} sx={{ p: 3, fontFamily: "var(--font-geist-sans)" }}>
+      <Paper elevation={3} sx={{ p: 3,  }}>
         <Box sx={{ mb: 3 }}>
-          <Typography variant="body1" sx={{ mb: 2, fontFamily: "var(--font-geist-sans)" }}>
+          <Typography variant="body1" sx={{ mb: 2,  }}>
             CSVまたはExcelファイルを選択してください
           </Typography>
           <Box
@@ -72,7 +71,7 @@ export default function EmployeeInfoPage() {
             }}
           >
             <CloudUpload sx={{ fontSize: 48, color: '#757575', mb: 1 }} />
-            <Typography variant="body2" sx={{ fontFamily: "var(--font-geist-sans)" }}>
+            <Typography variant="body2" sx={{  }}>
               ファイルをドラッグ&ドロップまたはクリックして選択
             </Typography>
             <input
@@ -85,11 +84,11 @@ export default function EmployeeInfoPage() {
         </Box>
 
         {file && (
-          <Alert severity="success" sx={{ mb: 3, fontFamily: "var(--font-geist-sans)" }}>
-            <Typography variant="body2" sx={{ fontFamily: "var(--font-geist-sans)" }}>
+          <Alert severity="success" sx={{ mb: 3,  }}>
+            <Typography variant="body2" sx={{  }}>
               選択されたファイル: <strong>{file.name}</strong>
             </Typography>
-            <Typography variant="caption" sx={{ fontFamily: "var(--font-geist-sans)" }}>
+            <Typography variant="caption" sx={{  }}>
               サイズ: {(file.size / 1024).toFixed(2)} KB
             </Typography>
           </Alert>
@@ -102,7 +101,6 @@ export default function EmployeeInfoPage() {
           size="large"
           startIcon={<CloudUpload />}
           sx={{ 
-            fontFamily: "var(--font-geist-sans)",
             px: 4,
             py: 1.5
           }}

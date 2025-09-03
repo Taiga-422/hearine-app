@@ -12,7 +12,7 @@ import {
   department_employees,
   section_employees,
   team_employees,
-} from "@/app/(private)/oz_info/dummy_data";
+} from "@/app/(private)/companyId/oz_info/dummy_data";
 import type { Department, Section, Team, Employee } from "@/types/organization";
 
 // ポジションIDから役職名を取得するためのマップ
@@ -236,7 +236,7 @@ export default function HomePage() {
 
   return (
     <main style={{ padding: "2rem", overflowX: "auto", whiteSpace: "nowrap" }}>
-      <Typography variant="h4" gutterBottom sx={{ fontFamily: "var(--font-geist-sans)" }}>
+      <Typography variant="h4" gutterBottom>
         体制図
       </Typography>
 
