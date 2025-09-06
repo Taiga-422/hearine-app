@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Box,
   Drawer,
@@ -8,6 +9,8 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  IconButton,
+  Tooltip,
 } from "@mui/material";
 import {
   Assessment as AssessmentIcon,
@@ -15,10 +18,13 @@ import {
   Person as PersonIcon,
   Poll as PollIcon,
   Group as GroupIcon,
+  ChevronLeft as ChevronLeftIcon,
+  ChevronRight as ChevronRightIcon,
 } from "@mui/icons-material";
 import { useRouter, usePathname } from "next/navigation";
 
-const DRAWER_WIDTH = 280;
+const DRAWER_WIDTH = 200;
+const DRAWER_CLOSED_WIDTH = 72;
 
 interface SidebarItem {
   id: string;
@@ -28,6 +34,7 @@ interface SidebarItem {
 }
 
 export default function SideBar() {
+  const [open, setOpen] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -68,54 +75,79 @@ export default function SideBar() {
     router.push(path);
   };
 
+  const handleDrawerToggle = () => {
+    setOpen(!open);
+  };
+
   return (
     <Drawer
       variant="permanent"
       sx={{
-        width: DRAWER_WIDTH,
+        width: open ? DRAWER_WIDTH : DRAWER_CLOSED_WIDTH,
         flexShrink: 0,
+        whiteSpace: "nowrap",
+        transition: "width 0.3s",
         "& .MuiDrawer-paper": { 
           boxSizing: "border-box", 
-          width: DRAWER_WIDTH,
-          backgroundColor: "#1f8d6cff", // 緑色の背景
-          color: "#ffffff", // 白色のテキスト
+          width: open ? DRAWER_WIDTH : DRAWER_CLOSED_WIDTH,
+          backgroundColor: "#1f8d6cff",
+          color: "#ffffff",
+          transition: "width 0.3s",
+          overflowX: "hidden",
         },
       }}
-      open
+      open={open}
     >
       {/* ヘッダーの高さ分のスペーサー */}
       <Toolbar/>
       
-      <Box sx={{ p: 2 }}>
+      {/* 開閉ボタン */}
+      <Box sx={{ display: "flex", justifyContent: open ? "flex-end" : "center", p: 1 }}>
+        <IconButton onClick={handleDrawerToggle} sx={{ color: "#ffffff" }}>
+          {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+        </IconButton>
+      </Box>
+      
+      <Box>
         <List>
           {sidebarItems.map((item) => (
-            <ListItem
+            <Tooltip
               key={item.id}
-              onClick={() => handleNavigation(item.path)}
-              sx={{
-                cursor: "pointer",
-                color: "#ffffff", // アイテムのテキストを白色
-                backgroundColor: pathname === item.path ? "rgba(255, 255, 255, 0.1)" : "transparent", // 選択時は半透明の白
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.08)", // ホバー時は薄い白
-                },
-                borderRadius: 1,
-                mb: 0.5,
-              }}
+              title={open ? "" : item.label}
+              placement="right"
+              arrow
             >
-              <ListItemIcon sx={{ color: "#ffffff" }}> {/* アイコンを白色 */}
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText 
-                primary={item.label}
+              <ListItem
+                onClick={() => handleNavigation(item.path)}
                 sx={{
-                  "& .MuiListItemText-primary": {
-                    color: "#ffffff", // テキストを白色
-                    fontFamily: "var(--font-geist-sans)",
-                  }
+                  cursor: "pointer",
+                  color: "#ffffff",
+                  height: 50,
+                  backgroundColor: pathname === item.path ? "rgba(255, 255, 255, 0.1)" : "transparent",
+                  "&:hover": {
+                    backgroundColor: "rgba(255, 255, 255, 0.08)",
+                  },
                 }}
-              />
-            </ListItem>
+              >
+                <ListItemIcon 
+                  sx={{ 
+                    color: "#ffffff",
+                  }}
+                >
+                  {item.icon}
+                </ListItemIcon>
+                {open && (
+                  <ListItemText 
+                    primary={item.label}
+                    sx={{
+                      "& .MuiListItemText-primary": {
+                        color: "#ffffff",
+                      }
+                    }}
+                  />
+                )}
+              </ListItem>
+            </Tooltip>
           ))}
         </List>
       </Box>
