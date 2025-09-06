@@ -61,7 +61,7 @@ export default function Header() {
             flexGrow: 1,
             fontWeight: "bold",
             cursor: "pointer",
-            color: "#1f8d6cff",
+            color: '#1db584',
           }}
           onClick={() => router.push("/")}
         >

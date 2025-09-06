@@ -7,14 +7,16 @@ import {
   Typography,
   TextField,
   Button,
+  Link,
 } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
-export default function SignUpPage() {
+export default function LoginPage() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    confirmPassword: '',
   });
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -25,8 +27,13 @@ export default function SignUpPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // サインアップ処理をここに実装
-    console.log('Sign up data:', formData);
+    // ログイン処理をここに実装
+    console.log('Login data:', formData);
+  };
+
+  const handleForgotPassword = () => {
+    // パスワードリセット処理
+    console.log('Forgot password clicked');
   };
 
   return (
@@ -144,45 +151,7 @@ export default function SignUpPage() {
               />
             </Box>
 
-            {/* Confirm Password */}
-            <Box>
-              <Typography
-                variant="body1"
-                sx={{
-                  mb: 1,
-                  color: '#333',
-                  fontWeight: 500,
-                  fontFamily: 'var(--font-geist-sans)',
-                }}
-              >
-                パスワード確認
-              </Typography>
-              <TextField
-                name="confirmPassword"
-                type="password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                fullWidth
-                variant="outlined"
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    backgroundColor: '#ffffff',
-                    borderRadius: 2,
-                    '& fieldset': {
-                      borderColor: '#e0e0e0',
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#1db584',
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#1db584',
-                    },
-                  },
-                }}
-              />
-            </Box>
-
-            {/* Submit Button */}
+            {/* Login Button */}
             <Button
               type="submit"
               variant="contained"
@@ -204,8 +173,31 @@ export default function SignUpPage() {
                 },
               }}
             >
-              サインアップ
+              ログイン
             </Button>
+
+            {/* Forgot Password Link */}
+            <Box sx={{ textAlign: 'center', mt: 2 }}>
+              <Link
+                component="button"
+                type="button"
+                onClick={handleForgotPassword}
+                sx={{
+                  color: '#333',
+                  textDecoration: 'underline',
+                  fontFamily: 'var(--font-geist-sans)',
+                  fontSize: '0.95rem',
+                  cursor: 'pointer',
+                  border: 'none',
+                  background: 'none',
+                  '&:hover': {
+                    color: '#1db584',
+                  },
+                }}
+              >
+                パスワードをお忘れですか？
+              </Link>
+            </Box>
           </Box>
         </Paper>
       </Box>
