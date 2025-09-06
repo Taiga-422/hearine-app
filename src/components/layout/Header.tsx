@@ -54,7 +54,7 @@ export default function Header() {
       <Toolbar>
         {/* 左端: Hearinロゴ */}
         <Typography
-          variant="h6"
+          variant="h4"
           noWrap
           component="div"
           sx={{
