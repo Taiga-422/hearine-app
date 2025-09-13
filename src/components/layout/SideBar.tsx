@@ -43,31 +43,31 @@ export default function SideBar() {
       id: "organization-status",
       label: "組織状況",
       icon: <AssessmentIcon />,
-      path: "/organization-status",
+      path: "/companyId/oz_info",
     },
     {
       id: "employee-voice",
       label: "社員の声",
       icon: <VoiceIcon />,
-      path: "/employee-voice",
+      path: "/companyId",
     },
     {
       id: "one-on-one",
       label: "1on1",
       icon: <PersonIcon />,
-      path: "/one-on-one",
+      path: "/companyId",
     },
     {
       id: "survey",
       label: "アンケート",
       icon: <PollIcon />,
-      path: "/survey",
+      path: "/companyId",
     },
     {
       id: "organization-info",
       label: "組織社員情報",
       icon: <GroupIcon />,
-      path: "/organization-info",
+      path: "/companyId/ep_info",
     },
   ];
 

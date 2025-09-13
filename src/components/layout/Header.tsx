@@ -5,11 +5,9 @@ import {
   Toolbar,
   Typography,
   Box,
-  Button,
   IconButton,
   Menu,
   MenuItem,
-  Avatar,
 } from "@mui/material";
 import { AccountCircle, ExitToApp } from "@mui/icons-material";
 import { useState } from "react";
@@ -63,7 +61,7 @@ export default function Header() {
             cursor: "pointer",
             color: '#1db584',
           }}
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/companyId")}
         >
           Hearin
         </Typography>
