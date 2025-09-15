@@ -9,7 +9,7 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import { AccountCircle, ExitToApp } from "@mui/icons-material";
+import { AccountCircle, ExitToApp, Apps } from "@mui/icons-material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -66,17 +66,36 @@ export default function Header() {
           Hearin
         </Typography>
 
-        {/* 右端: プロフィールとログアウト */}
+        {/* 右端: 各メニュー */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            {/* プロフィールボタン */}
+            {/* メニューボタン */}
             <IconButton
             edge="end"
             aria-label="account of current user"
-            aria-controls="primary-search-account-menu"
+            aria-controls="menu"
             aria-haspopup="true"
             onClick={handleProfileMenuOpen}
             sx={{ 
               color: "#ffffff",
+              backgroundColor: "#ffa939ff",
+              "&:hover": {
+              backgroundColor: "#e6952e"
+              }
+            }}
+            >
+              <Apps />
+            </IconButton>
+
+            {/* プロフィールボタン */}
+            <IconButton
+            edge="end"
+            aria-label="account of current user"
+            aria-controls="profile"
+            aria-haspopup="true"
+            onClick={handleProfileMenuOpen}
+            sx={{ 
+              color: "#ffffff",
+              ml: 1,
               backgroundColor: "#ffa939ff",
               "&:hover": {
               backgroundColor: "#e6952e"
@@ -104,7 +123,7 @@ export default function Header() {
 
         {/* プロフィールメニュー */}
         <Menu
-          id="primary-search-account-menu"
+          id="profile"
           anchorEl={anchorEl}
           anchorOrigin={{
             vertical: "bottom",
