@@ -1,3 +1,5 @@
+// サイドバーは廃止となりました。将来的に再度必要になる可能性があるため、コードは残してあります。
+
 "use client";
 
 import { useState } from "react";

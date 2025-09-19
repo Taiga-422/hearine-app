@@ -37,39 +37,37 @@ export default function Header() {
   };
 
   const handleProfile = () => {
-    // プロフィールページへの遷移処理
-    console.log("プロフィールページへ遷移");
+    // ⇊個人プロファイルページへのリンクを追加
+    // router.push("/companyId/employee-profile");
     handleProfileMenuClose();
   };
 
   // メニュー項目のハンドラー
   const handleEmployeeProfile = () => {
-    console.log("社員プロファイルページへ遷移");
+    // ⇊社員プロファイルページへのリンクを追加
     // router.push("/companyId/employee-profile");
     handleMainMenuClose();
   };
 
   const handleOrgChart = () => {
-    console.log("組織体制図ページへ遷移");
-    // router.push("/companyId/org-chart");
+    router.push("/companyId/oz_info");
     handleMainMenuClose();
   };
 
   const handleCeoAI = () => {
-    console.log("社長AIページへ遷移");
+    // ⇊社長AIページへのリンクを追加
     // router.push("/companyId/ceo-ai");
     handleMainMenuClose();
   };
 
   const handleCompanyInfo = () => {
-    console.log("会社情報ページへ遷移");
+    // ⇊会社情報ページへのリンクを追加
     // router.push("/companyId/company-info");
     handleMainMenuClose();
   };
 
   const handleLogout = () => {
     // ログアウト処理
-    console.log("ログアウト処理");
     handleProfileMenuClose();
     // 実際のログアウト処理をここに実装
     // router.push('/login');
