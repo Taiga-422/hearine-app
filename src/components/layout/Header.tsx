@@ -14,32 +14,69 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Header() {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [profileAnchorEl, setProfileAnchorEl] = useState<null | HTMLElement>(null);
+  const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
   const router = useRouter();
 
+  // プロフィールメニュー用のハンドラー
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+    setProfileAnchorEl(event.currentTarget);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
+  const handleProfileMenuClose = () => {
+    setProfileAnchorEl(null);
+  };
+
+  // メニューボタン用のハンドラー
+  const handleMainMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleMainMenuClose = () => {
+    setMenuAnchorEl(null);
   };
 
   const handleProfile = () => {
     // プロフィールページへの遷移処理
     console.log("プロフィールページへ遷移");
-    handleMenuClose();
+    handleProfileMenuClose();
+  };
+
+  // メニュー項目のハンドラー
+  const handleEmployeeProfile = () => {
+    console.log("社員プロファイルページへ遷移");
+    // router.push("/companyId/employee-profile");
+    handleMainMenuClose();
+  };
+
+  const handleOrgChart = () => {
+    console.log("組織体制図ページへ遷移");
+    // router.push("/companyId/org-chart");
+    handleMainMenuClose();
+  };
+
+  const handleCeoAI = () => {
+    console.log("社長AIページへ遷移");
+    // router.push("/companyId/ceo-ai");
+    handleMainMenuClose();
+  };
+
+  const handleCompanyInfo = () => {
+    console.log("会社情報ページへ遷移");
+    // router.push("/companyId/company-info");
+    handleMainMenuClose();
   };
 
   const handleLogout = () => {
     // ログアウト処理
     console.log("ログアウト処理");
-    handleMenuClose();
+    handleProfileMenuClose();
     // 実際のログアウト処理をここに実装
     // router.push('/login');
   };
 
-  const isMenuOpen = Boolean(anchorEl);
+  const isProfileMenuOpen = Boolean(profileAnchorEl);
+  const isMainMenuOpen = Boolean(menuAnchorEl);
 
   return (
     <AppBar 
@@ -71,10 +108,10 @@ export default function Header() {
             {/* メニューボタン */}
             <IconButton
             edge="end"
-            aria-label="account of current user"
-            aria-controls="menu"
+            aria-label="main menu"
+            aria-controls="main-menu"
             aria-haspopup="true"
-            onClick={handleProfileMenuOpen}
+            onClick={handleMainMenuOpen}
             sx={{ 
               color: "#ffffff",
               backgroundColor: "#ffa939ff",
@@ -121,10 +158,10 @@ export default function Header() {
             </IconButton>
           </Box>
 
-        {/* プロフィールメニュー */}
+        {/* メインメニュー */}
         <Menu
-          id="profile"
-          anchorEl={anchorEl}
+          id="main-menu"
+          anchorEl={menuAnchorEl}
           anchorOrigin={{
             vertical: "bottom",
             horizontal: "right",
@@ -134,8 +171,38 @@ export default function Header() {
             vertical: "top",
             horizontal: "right",
           }}
-          open={isMenuOpen}
-          onClose={handleMenuClose}
+          open={isMainMenuOpen}
+          onClose={handleMainMenuClose}
+        >
+          <MenuItem onClick={handleEmployeeProfile}>
+            社員プロファイル
+          </MenuItem>
+          <MenuItem onClick={handleOrgChart}>
+            組織体制図
+          </MenuItem>
+          <MenuItem onClick={handleCeoAI}>
+            社長AI
+          </MenuItem>
+          <MenuItem onClick={handleCompanyInfo}>
+            会社情報
+          </MenuItem>
+        </Menu>
+
+        {/* プロフィールメニュー */}
+        <Menu
+          id="profile"
+          anchorEl={profileAnchorEl}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          open={isProfileMenuOpen}
+          onClose={handleProfileMenuClose}
         >
           <MenuItem 
             onClick={handleProfile}
