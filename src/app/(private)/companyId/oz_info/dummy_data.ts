@@ -1,4 +1,4 @@
-import { Organization, Position, Employee, OrganizationMembership } from '@/app/(private)/companyId/oz_info/schema';
+import { Organization, Position, Employee, OrganizationMembership, Project, ProjectMembership } from '@/app/(private)/companyId/oz_info/schema';
 
 export const improved_organizations: Organization[] = [
   // 会社
@@ -608,5 +608,520 @@ export const improved_memberships: OrganizationMembership[] = [
     id: "mem-30", employee_id: "emp-30", organization_id: "org-21", position_id: "pos-6",
     start_date: new Date('2024-04-01'), end_date: null, is_primary: true,
     created_at: new Date('2024-01-01'), updated_at: new Date('2024-01-01')
+  }
+];
+
+export const improved_projects: Project[] = [
+  {
+    id: "proj-1",
+    name: "新ECサイト構築プロジェクト",
+    description: "BtoC向けECサイトの新規構築とモバイルアプリ開発",
+    industry: "retail",
+    client_name: "株式会社ABC商事",
+    created_at: new Date('2024-01-15'),
+    updated_at: new Date('2024-01-15'),
+    is_active: true
+  },
+  {
+    id: "proj-2", 
+    name: "基幹システム刷新",
+    description: "レガシーシステムからクラウドベースシステムへの移行",
+    industry: "manufacturing",
+    client_name: "XYZ製造株式会社",
+    created_at: new Date('2024-02-01'),
+    updated_at: new Date('2024-02-01'),
+    is_active: true
+  },
+  {
+    id: "proj-3",
+    name: "金融データ分析基盤構築",
+    description: "リアルタイム取引データ分析システムの構築",
+    industry: "finance",
+    client_name: "みらい銀行",
+    created_at: new Date('2024-02-10'),
+    updated_at: new Date('2024-02-10'),
+    is_active: true
+  },
+  {
+    id: "proj-4",
+    name: "病院管理システム開発",
+    description: "電子カルテシステムと予約管理システムの統合開発",
+    industry: "healthcare",
+    client_name: "総合医療センター",
+    created_at: new Date('2024-03-01'),
+    updated_at: new Date('2024-03-01'),
+    is_active: true
+  },
+  {
+    id: "proj-5",
+    name: "スマートファクトリー導入",
+    description: "IoTを活用した工場自動化システムの導入",
+    industry: "manufacturing",
+    client_name: "テック工業株式会社",
+    created_at: new Date('2024-03-15'),
+    updated_at: new Date('2024-03-15'),
+    is_active: true
+  },
+  {
+    id: "proj-6",
+    name: "配送最適化システム",
+    description: "AIを活用した配送ルート最適化システムの開発",
+    industry: "logistics",
+    client_name: "ロジスティクス株式会社",
+    created_at: new Date('2024-04-01'),
+    updated_at: new Date('2024-04-01'),
+    is_active: true
+  },
+  {
+    id: "proj-7",
+    name: "学習管理システム刷新",
+    description: "大学向けオンライン学習プラットフォームの構築",
+    industry: "education",
+    client_name: "私立○○大学",
+    created_at: new Date('2024-04-10'),
+    updated_at: new Date('2024-04-10'),
+    is_active: true
+  },
+  {
+    id: "proj-8",
+    name: "動画配信プラットフォーム",
+    description: "ライブストリーミング対応動画配信サービスの開発",
+    industry: "media_entertainment",
+    client_name: "メディア株式会社",
+    created_at: new Date('2024-05-01'),
+    updated_at: new Date('2024-05-01'),
+    is_active: true
+  },
+  {
+    id: "proj-9",
+    name: "自治体デジタル化支援",
+    description: "行政手続きのデジタル化とマイナンバー連携システム",
+    industry: "government",
+    client_name: "○○市役所",
+    created_at: new Date('2024-05-15'),
+    updated_at: new Date('2024-05-15'),
+    is_active: true
+  },
+  {
+    id: "proj-10",
+    name: "エネルギー管理システム",
+    description: "スマートグリッド対応のエネルギー管理システム構築",
+    industry: "energy_utilities",
+    client_name: "グリーンエナジー株式会社",
+    created_at: new Date('2024-06-01'),
+    updated_at: new Date('2024-06-01'),
+    is_active: true
+  }
+];
+
+export const improved_project_memberships: ProjectMembership[] = [
+  // プロジェクト1: 新ECサイト構築プロジェクト (emp-14: チームリーダー, emp-25, emp-26)
+  {
+    id: "pm-1",
+    employee_id: "emp-14", // 清水裕太 (フロントエンド開発チームリーダー)
+    project_id: "proj-1",
+    role: "project_manager",
+    monthly_rate: 800000,
+    allocation_percentage: 80,
+    start_date: new Date('2024-01-15'),
+    end_date: null,
+    created_at: new Date('2024-01-15'),
+    updated_at: new Date('2024-01-15'),
+    is_active: true
+  },
+  {
+    id: "pm-2",
+    employee_id: "emp-25", // 藤田千尋 (フロントエンド開発チームメンバー)
+    project_id: "proj-1",
+    role: "senior_member",
+    monthly_rate: 650000,
+    allocation_percentage: 90,
+    start_date: new Date('2024-01-15'),
+    end_date: null,
+    created_at: new Date('2024-01-15'),
+    updated_at: new Date('2024-01-15'),
+    is_active: true
+  },
+  {
+    id: "pm-3",
+    employee_id: "emp-26", // 木村浩二 (バックエンド開発チームメンバー)
+    project_id: "proj-1",
+    role: "member",
+    monthly_rate: 600000,
+    allocation_percentage: 85,
+    start_date: new Date('2024-01-15'),
+    end_date: null,
+    created_at: new Date('2024-01-15'),
+    updated_at: new Date('2024-01-15'),
+    is_active: true
+  },
+
+  // プロジェクト2: 基幹システム刷新 (emp-7: 課長, emp-17, emp-18)
+  {
+    id: "pm-4",
+    employee_id: "emp-7", // 山本愛子 (開発課長)
+    project_id: "proj-2",
+    role: "project_manager",
+    monthly_rate: 900000,
+    allocation_percentage: 70,
+    start_date: new Date('2024-02-01'),
+    end_date: null,
+    created_at: new Date('2024-02-01'),
+    updated_at: new Date('2024-02-01'),
+    is_active: true
+  },
+  {
+    id: "pm-5",
+    employee_id: "emp-17", // 原沙織 (法人営業第1チームメンバー)
+    project_id: "proj-2",
+    role: "team_leader",
+    monthly_rate: 700000,
+    allocation_percentage: 75,
+    start_date: new Date('2024-02-01'),
+    end_date: null,
+    created_at: new Date('2024-02-01'),
+    updated_at: new Date('2024-02-01'),
+    is_active: true
+  },
+  {
+    id: "pm-6",
+    employee_id: "emp-18", // 石井拓也 (法人営業第1チームメンバー)
+    project_id: "proj-2",
+    role: "member",
+    monthly_rate: 550000,
+    allocation_percentage: 80,
+    start_date: new Date('2024-02-01'),
+    end_date: null,
+    created_at: new Date('2024-02-01'),
+    updated_at: new Date('2024-02-01'),
+    is_active: true
+  },
+
+  // プロジェクト3: 金融データ分析基盤構築 (emp-15: チームリーダー, emp-27, emp-28)
+  {
+    id: "pm-7",
+    employee_id: "emp-15", // 松本恵美 (システム運用チームリーダー)
+    project_id: "proj-3",
+    role: "project_manager",
+    monthly_rate: 850000,
+    allocation_percentage: 90,
+    start_date: new Date('2024-02-10'),
+    end_date: null,
+    created_at: new Date('2024-02-10'),
+    updated_at: new Date('2024-02-10'),
+    is_active: true
+  },
+  {
+    id: "pm-8",
+    employee_id: "emp-27", // 林美和 (システム運用チームメンバー)
+    project_id: "proj-3",
+    role: "senior_member",
+    monthly_rate: 720000,
+    allocation_percentage: 95,
+    start_date: new Date('2024-02-10'),
+    end_date: null,
+    created_at: new Date('2024-02-10'),
+    updated_at: new Date('2024-02-10'),
+    is_active: true
+  },
+  {
+    id: "pm-9",
+    employee_id: "emp-28", // 酒井和也 (セキュリティチームメンバー)
+    project_id: "proj-3",
+    role: "member",
+    monthly_rate: 680000,
+    allocation_percentage: 85,
+    start_date: new Date('2024-02-10'),
+    end_date: null,
+    created_at: new Date('2024-02-10'),
+    updated_at: new Date('2024-02-10'),
+    is_active: true
+  },
+
+  // プロジェクト4: 病院管理システム開発 (emp-12: チームリーダー, emp-19, emp-20)
+  {
+    id: "pm-10",
+    employee_id: "emp-12", // 山田隆司 (法人営業第2チームリーダー)
+    project_id: "proj-4",
+    role: "project_manager",
+    monthly_rate: 780000,
+    allocation_percentage: 85,
+    start_date: new Date('2024-03-01'),
+    end_date: null,
+    created_at: new Date('2024-03-01'),
+    updated_at: new Date('2024-03-01'),
+    is_active: true
+  },
+  {
+    id: "pm-11",
+    employee_id: "emp-19", // 森香織 (法人営業第2チームメンバー)
+    project_id: "proj-4",
+    role: "team_leader",
+    monthly_rate: 650000,
+    allocation_percentage: 90,
+    start_date: new Date('2024-03-01'),
+    end_date: null,
+    created_at: new Date('2024-03-01'),
+    updated_at: new Date('2024-03-01'),
+    is_active: true
+  },
+  {
+    id: "pm-12",
+    employee_id: "emp-20", // 橋本正樹 (法人営業第2チームメンバー)
+    project_id: "proj-4",
+    role: "member",
+    monthly_rate: 580000,
+    allocation_percentage: 80,
+    start_date: new Date('2024-03-01'),
+    end_date: null,
+    created_at: new Date('2024-03-01'),
+    updated_at: new Date('2024-03-01'),
+    is_active: true
+  },
+
+  // プロジェクト5: スマートファクトリー導入 (emp-13: チームリーダー, emp-21, emp-22)
+  {
+    id: "pm-13",
+    employee_id: "emp-13", // 佐々木優子 (個人営業第1チームリーダー)
+    project_id: "proj-5",
+    role: "project_manager",
+    monthly_rate: 820000,
+    allocation_percentage: 75,
+    start_date: new Date('2024-03-15'),
+    end_date: null,
+    created_at: new Date('2024-03-15'),
+    updated_at: new Date('2024-03-15'),
+    is_active: true
+  },
+  {
+    id: "pm-14",
+    employee_id: "emp-21", // 岡田麻衣 (個人営業第1チームメンバー)
+    project_id: "proj-5",
+    role: "senior_member",
+    monthly_rate: 690000,
+    allocation_percentage: 85,
+    start_date: new Date('2024-03-15'),
+    end_date: null,
+    created_at: new Date('2024-03-15'),
+    updated_at: new Date('2024-03-15'),
+    is_active: true
+  },
+  {
+    id: "pm-15",
+    employee_id: "emp-22", // 村上慎一 (個人営業第1チームメンバー)
+    project_id: "proj-5",
+    role: "member",
+    monthly_rate: 620000,
+    allocation_percentage: 90,
+    start_date: new Date('2024-03-15'),
+    end_date: null,
+    created_at: new Date('2024-03-15'),
+    updated_at: new Date('2024-03-15'),
+    is_active: true
+  },
+
+  // プロジェクト6: 配送最適化システム (emp-16: チームリーダー, emp-23, emp-24)
+  {
+    id: "pm-16",
+    employee_id: "emp-16", // 井上智也 (採用チームリーダー)
+    project_id: "proj-6",
+    role: "project_manager",
+    monthly_rate: 750000,
+    allocation_percentage: 80,
+    start_date: new Date('2024-04-01'),
+    end_date: null,
+    created_at: new Date('2024-04-01'),
+    updated_at: new Date('2024-04-01'),
+    is_active: true
+  },
+  {
+    id: "pm-17",
+    employee_id: "emp-23", // 青木由美 (個人営業第2チームメンバー)
+    project_id: "proj-6",
+    role: "team_leader",
+    monthly_rate: 640000,
+    allocation_percentage: 85,
+    start_date: new Date('2024-04-01'),
+    end_date: null,
+    created_at: new Date('2024-04-01'),
+    updated_at: new Date('2024-04-01'),
+    is_active: true
+  },
+  {
+    id: "pm-18",
+    employee_id: "emp-24", // 藤井健二 (個人営業第2チームメンバー)
+    project_id: "proj-6",
+    role: "member",
+    monthly_rate: 570000,
+    allocation_percentage: 75,
+    start_date: new Date('2024-04-01'),
+    end_date: null,
+    created_at: new Date('2024-04-01'),
+    updated_at: new Date('2024-04-01'),
+    is_active: true
+  },
+
+  // プロジェクト7: 学習管理システム刷新 (emp-11: チームリーダー, emp-29, emp-30)
+  {
+    id: "pm-19",
+    employee_id: "emp-11", // 吉田直子 (法人営業第1チームリーダー)
+    project_id: "proj-7",
+    role: "project_manager",
+    monthly_rate: 800000,
+    allocation_percentage: 90,
+    start_date: new Date('2024-04-10'),
+    end_date: null,
+    created_at: new Date('2024-04-10'),
+    updated_at: new Date('2024-04-10'),
+    is_active: true
+  },
+  {
+    id: "pm-20",
+    employee_id: "emp-29", // 福田彩子 (労務チームメンバー)
+    project_id: "proj-7",
+    role: "senior_member",
+    monthly_rate: 660000,
+    allocation_percentage: 80,
+    start_date: new Date('2024-04-10'),
+    end_date: null,
+    created_at: new Date('2024-04-10'),
+    updated_at: new Date('2024-04-10'),
+    is_active: true
+  },
+  {
+    id: "pm-21",
+    employee_id: "emp-30", // 西田翔太 (財務チームメンバー)
+    project_id: "proj-7",
+    role: "member",
+    monthly_rate: 590000,
+    allocation_percentage: 85,
+    start_date: new Date('2024-04-10'),
+    end_date: null,
+    created_at: new Date('2024-04-10'),
+    updated_at: new Date('2024-04-10'),
+    is_active: true
+  },
+
+  // プロジェクト8: 動画配信プラットフォーム (emp-5: 課長, emp-17 (兼任), emp-19 (兼任))
+  {
+    id: "pm-22",
+    employee_id: "emp-5", // 伊藤美穂 (法人営業課長)
+    project_id: "proj-8",
+    role: "project_manager",
+    monthly_rate: 950000,
+    allocation_percentage: 60,
+    start_date: new Date('2024-05-01'),
+    end_date: null,
+    created_at: new Date('2024-05-01'),
+    updated_at: new Date('2024-05-01'),
+    is_active: true
+  },
+  {
+    id: "pm-23",
+    employee_id: "emp-17", // 原沙織 (兼任)
+    project_id: "proj-8",
+    role: "team_leader",
+    monthly_rate: 700000,
+    allocation_percentage: 25, // プロジェクト2と兼任
+    start_date: new Date('2024-05-01'),
+    end_date: null,
+    created_at: new Date('2024-05-01'),
+    updated_at: new Date('2024-05-01'),
+    is_active: true
+  },
+  {
+    id: "pm-24",
+    employee_id: "emp-19", // 森香織 (兼任)
+    project_id: "proj-8",
+    role: "member",
+    monthly_rate: 650000,
+    allocation_percentage: 10, // プロジェクト4と兼任
+    start_date: new Date('2024-05-01'),
+    end_date: null,
+    created_at: new Date('2024-05-01'),
+    updated_at: new Date('2024-05-01'),
+    is_active: true
+  },
+
+  // プロジェクト9: 自治体デジタル化支援 (emp-6: 課長, emp-18 (兼任), emp-20 (兼任))
+  {
+    id: "pm-25",
+    employee_id: "emp-6", // 渡辺健太 (個人営業課長)
+    project_id: "proj-9",
+    role: "project_manager",
+    monthly_rate: 920000,
+    allocation_percentage: 70,
+    start_date: new Date('2024-05-15'),
+    end_date: null,
+    created_at: new Date('2024-05-15'),
+    updated_at: new Date('2024-05-15'),
+    is_active: true
+  },
+  {
+    id: "pm-26",
+    employee_id: "emp-18", // 石井拓也 (兼任)
+    project_id: "proj-9",
+    role: "team_leader",
+    monthly_rate: 550000,
+    allocation_percentage: 20, // プロジェクト2と兼任
+    start_date: new Date('2024-05-15'),
+    end_date: null,
+    created_at: new Date('2024-05-15'),
+    updated_at: new Date('2024-05-15'),
+    is_active: true
+  },
+  {
+    id: "pm-27",
+    employee_id: "emp-20", // 橋本正樹 (兼任)
+    project_id: "proj-9",
+    role: "member",
+    monthly_rate: 580000,
+    allocation_percentage: 20, // プロジェクト4と兼任
+    start_date: new Date('2024-05-15'),
+    end_date: null,
+    created_at: new Date('2024-05-15'),
+    updated_at: new Date('2024-05-15'),
+    is_active: true
+  },
+
+  // プロジェクト10: エネルギー管理システム (emp-8: 課長, emp-27 (兼任), emp-28 (兼任))
+  {
+    id: "pm-28",
+    employee_id: "emp-8", // 中村大輔 (インフラ課長)
+    project_id: "proj-10",
+    role: "project_manager",
+    monthly_rate: 880000,
+    allocation_percentage: 80,
+    start_date: new Date('2024-06-01'),
+    end_date: null,
+    created_at: new Date('2024-06-01'),
+    updated_at: new Date('2024-06-01'),
+    is_active: true
+  },
+  {
+    id: "pm-29",
+    employee_id: "emp-27", // 林美和 (兼任)
+    project_id: "proj-10",
+    role: "senior_member",
+    monthly_rate: 720000,
+    allocation_percentage: 5, // プロジェクト3と兼任
+    start_date: new Date('2024-06-01'),
+    end_date: null,
+    created_at: new Date('2024-06-01'),
+    updated_at: new Date('2024-06-01'),
+    is_active: true
+  },
+  {
+    id: "pm-30",
+    employee_id: "emp-28", // 酒井和也 (兼任)
+    project_id: "proj-10",
+    role: "member",
+    monthly_rate: 680000,
+    allocation_percentage: 15, // プロジェクト3と兼任
+    start_date: new Date('2024-06-01'),
+    end_date: null,
+    created_at: new Date('2024-06-01'),
+    updated_at: new Date('2024-06-01'),
+    is_active: true
   }
 ];
