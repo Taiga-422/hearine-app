@@ -16,16 +16,13 @@ import {
   Chip,
   Select,
   MenuItem,
-  InputLabel,
   FormControl,
   TextField,
   Box,
   Typography,
   Stack,
   IconButton,
-  Tooltip,
   Button,
-  Grid,
 } from "@mui/material";
 import SortIcon from "@mui/icons-material/Sort";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
@@ -125,7 +122,7 @@ export default function ProjectListPage() {
   };
 
   const filteredAndSortedProjects = useMemo(() => {
-    let filtered = projects.filter((project) => {
+    const filtered = projects.filter((project) => {
       if (filterIndustry && project.industry !== filterIndustry) return false;
       if (filterScale && project.scale !== filterScale) return false;
       if (filterClient && !project.client_name.toLowerCase().includes(filterClient.toLowerCase())) return false;
@@ -134,25 +131,28 @@ export default function ProjectListPage() {
       return true;
     });
     filtered.sort((a, b) => {
-      let valueA: any;
-      let valueB: any;
+      let valueA: string | number;
+      let valueB: string | number;
       
       if (sortField === "status") {
         valueA = getProjectStatus(a);
         valueB = getProjectStatus(b);
       } else {
-        valueA = a[sortField];
-        valueB = b[sortField];
+        const rawValueA = a[sortField];
+        const rawValueB = b[sortField];
         
         if (sortField === "start_date" || sortField === "end_date") {
-          valueA = valueA ? new Date(valueA).getTime() : 0;
-          valueB = valueB ? new Date(valueB).getTime() : 0;
+          valueA = rawValueA ? new Date(rawValueA as string).getTime() : 0;
+          valueB = rawValueB ? new Date(rawValueB as string).getTime() : 0;
+        } else {
+          valueA = rawValueA as string;
+          valueB = rawValueB as string;
         }
       }
       
       if (typeof valueA === "string") {
         valueA = valueA.toLowerCase();
-        valueB = valueB.toLowerCase();
+        valueB = (valueB as string).toLowerCase();
       }
       if (valueA < valueB) return sortOrder === "asc" ? -1 : 1;
       if (valueA > valueB) return sortOrder === "asc" ? 1 : -1;

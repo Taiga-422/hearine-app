@@ -1,4 +1,4 @@
-import { Organization, Employee, Position, OrganizationMembership, Project, ProjectMembership } from '../app/(private)/companyId/schema';
+import { Organization, Employee, Position, OrganizationMembership, ProjectMembership } from '../app/(private)/companyId/schema';
 
 // 社員情報の型定義
 export interface EmployeeInfo {

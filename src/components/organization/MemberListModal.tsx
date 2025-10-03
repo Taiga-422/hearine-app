@@ -94,7 +94,7 @@ export const MemberListModal: React.FC<MemberListModalProps> = ({
                 </TableRow>
               </TableHead>
               <TableBody>
-                {employees.map(({ employee, position, membership, organization: empOrg }) => (
+                {employees.map(({ employee, position, organization: empOrg }) => (
                   <TableRow key={`${employee.id}-${empOrg.id}`} hover>
                     <TableCell>
                       <Chip 
