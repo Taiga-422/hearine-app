@@ -75,6 +75,13 @@ export type IndustryType =
   | 'consulting' // コンサルティング
   | 'other'; // その他
 
+// プロジェクト規模の型定義
+export type ProjectScale = 
+  | 'small' // 小規模（1-5人）
+  | 'medium' // 中規模（6-15人）
+  | 'large' // 大規模（16-50人）
+  | 'enterprise'; // 超大規模（51人以上）
+
 // 6. プロジェクトテーブル
 export interface Project {
   id: string;
@@ -82,6 +89,9 @@ export interface Project {
   description: string; // 概要・目的
   industry: IndustryType; // 業界（選択式）
   client_name: string; // 顧客名
+  start_date: Date; // プロジェクト開始日
+  end_date: Date | null; // プロジェクト終了日（nullの場合は未定）
+  scale: ProjectScale; // プロジェクト規模
   created_at: Date;
   updated_at: Date;
   is_active: boolean; // 論理削除フラグ

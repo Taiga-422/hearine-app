@@ -54,6 +54,11 @@ export default function Header() {
     handleMainMenuClose();
   };
 
+  const handleProjectList = () => {
+    router.push("/companyId/pj_info");
+    handleMainMenuClose();
+  };
+
   const handleCeoAI = () => {
     // ⇊社長AIページへのリンクを追加
     // router.push("/companyId/ceo-ai");
@@ -177,6 +182,9 @@ export default function Header() {
           </MenuItem>
           <MenuItem onClick={handleOrgChart}>
             組織体制図
+          </MenuItem>
+          <MenuItem onClick={handleProjectList}>
+            プロジェクト一覧
           </MenuItem>
           <MenuItem onClick={handleCeoAI}>
             社長AI

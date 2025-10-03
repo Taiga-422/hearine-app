@@ -1,4 +1,4 @@
-import { Organization, Position, Employee, OrganizationMembership, Project, ProjectMembership } from '@/app/(private)/companyId/oz_info/schema';
+import { Organization, Position, Employee, OrganizationMembership, Project, ProjectMembership } from '@/app/(private)/companyId/schema';
 
 export const improved_organizations: Organization[] = [
   // 会社
@@ -618,6 +618,9 @@ export const improved_projects: Project[] = [
     description: "BtoC向けECサイトの新規構築とモバイルアプリ開発",
     industry: "retail",
     client_name: "株式会社ABC商事",
+    start_date: new Date('2024-01-15'),
+    end_date: new Date('2024-07-31'),
+    scale: "small",
     created_at: new Date('2024-01-15'),
     updated_at: new Date('2024-01-15'),
     is_active: true
@@ -628,6 +631,9 @@ export const improved_projects: Project[] = [
     description: "レガシーシステムからクラウドベースシステムへの移行",
     industry: "manufacturing",
     client_name: "XYZ製造株式会社",
+    start_date: new Date('2024-02-01'),
+    end_date: new Date('2025-01-31'),
+    scale: "large",
     created_at: new Date('2024-02-01'),
     updated_at: new Date('2024-02-01'),
     is_active: true
@@ -638,6 +644,9 @@ export const improved_projects: Project[] = [
     description: "リアルタイム取引データ分析システムの構築",
     industry: "finance",
     client_name: "みらい銀行",
+    start_date: new Date('2024-02-10'),
+    end_date: new Date('2024-12-20'),
+    scale: "medium",
     created_at: new Date('2024-02-10'),
     updated_at: new Date('2024-02-10'),
     is_active: true
@@ -648,6 +657,9 @@ export const improved_projects: Project[] = [
     description: "電子カルテシステムと予約管理システムの統合開発",
     industry: "healthcare",
     client_name: "総合医療センター",
+    start_date: new Date('2024-03-01'),
+    end_date: new Date('2024-11-30'),
+    scale: "medium",
     created_at: new Date('2024-03-01'),
     updated_at: new Date('2024-03-01'),
     is_active: true
@@ -658,6 +670,9 @@ export const improved_projects: Project[] = [
     description: "IoTを活用した工場自動化システムの導入",
     industry: "manufacturing",
     client_name: "テック工業株式会社",
+    start_date: new Date('2024-03-15'),
+    end_date: new Date('2025-03-14'),
+    scale: "large",
     created_at: new Date('2024-03-15'),
     updated_at: new Date('2024-03-15'),
     is_active: true
@@ -668,6 +683,9 @@ export const improved_projects: Project[] = [
     description: "AIを活用した配送ルート最適化システムの開発",
     industry: "logistics",
     client_name: "ロジスティクス株式会社",
+    start_date: new Date('2024-04-01'),
+    end_date: new Date('2024-09-30'),
+    scale: "small",
     created_at: new Date('2024-04-01'),
     updated_at: new Date('2024-04-01'),
     is_active: true
@@ -678,6 +696,9 @@ export const improved_projects: Project[] = [
     description: "大学向けオンライン学習プラットフォームの構築",
     industry: "education",
     client_name: "私立○○大学",
+    start_date: new Date('2024-04-10'),
+    end_date: new Date('2025-03-31'),
+    scale: "medium",
     created_at: new Date('2024-04-10'),
     updated_at: new Date('2024-04-10'),
     is_active: true
@@ -688,6 +709,9 @@ export const improved_projects: Project[] = [
     description: "ライブストリーミング対応動画配信サービスの開発",
     industry: "media_entertainment",
     client_name: "メディア株式会社",
+    start_date: new Date('2024-05-01'),
+    end_date: null, // 継続中
+    scale: "enterprise",
     created_at: new Date('2024-05-01'),
     updated_at: new Date('2024-05-01'),
     is_active: true
@@ -698,6 +722,9 @@ export const improved_projects: Project[] = [
     description: "行政手続きのデジタル化とマイナンバー連携システム",
     industry: "government",
     client_name: "○○市役所",
+    start_date: new Date('2024-05-15'),
+    end_date: new Date('2025-05-14'),
+    scale: "large",
     created_at: new Date('2024-05-15'),
     updated_at: new Date('2024-05-15'),
     is_active: true
@@ -708,6 +735,9 @@ export const improved_projects: Project[] = [
     description: "スマートグリッド対応のエネルギー管理システム構築",
     industry: "energy_utilities",
     client_name: "グリーンエナジー株式会社",
+    start_date: new Date('2024-06-01'),
+    end_date: new Date('2025-02-28'),
+    scale: "medium",
     created_at: new Date('2024-06-01'),
     updated_at: new Date('2024-06-01'),
     is_active: true
